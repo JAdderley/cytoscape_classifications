@@ -198,9 +198,11 @@ var styles = [ {
     {
       "selector" : ".highlighted",
       "css" : {
-        "background-color" : "yellow",
-        "border-color" : "red",
-        "border-width" : 4
+        "background-color" : "#FFD700", // Gold color
+        "border-color" : "#FF4500",     // OrangeRed color
+        "border-width" : 4,
+        "shape" : "ellipse",            // Optional: Change shape
+        "z-index" : 9999
       }
     }
   ]

@@ -1,32 +1,50 @@
-/* styles/main.css */
+// scripts/main.js
 
-/* Ensure the HTML and Body take up the full height and width */
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background: #fff;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #555;
-    font-weight: 100;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    "use strict";
 
-/* Style for the browsehappy message */
-.browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
+    // Function to retrieve style by title
+    function getStyleByTitle(title, stylesArray) {
+        for (var i = 0; i < stylesArray.length; i++) {
+            if (stylesArray[i].title === title) {
+                return stylesArray[i];
+            }
+        }
+        return null;
+    }
 
-/* Make the Cytoscape container fill the entire page */
-#cy {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #eee;
-    display: block; /* Ensures the div behaves as a block-level element */
-}
+    var cyContainer = "#cy",
+        network = networks[Object.keys(networks)[0]],
+        styleDefinition = styles[0];
+
+    // Initialize Cytoscape
+    var cy = cytoscape({
+        container: document.querySelector(cyContainer),
+
+        elements: network.elements, // Add elements during initialization
+
+        style: styleDefinition.style, // Directly provide the style array
+
+        layout: {
+            name: "preset",
+            padding: 10
+        },
+
+        boxSelectionEnabled: true
+    });
+
+    window.cy = cy; // Make Cytoscape instance globally accessible
+
+    console.log("Network Data:", network);
+    console.log("Style Definition:", styleDefinition);
+
+    // Apply additional styles if needed
+    var defaultStyle = getStyleByTitle("default", styleDefinition.style);
+    if (defaultStyle === null) {
+        defaultStyle = styleDefinition; // Fallback to the entire styleDefinition
+    }
+    cy.style().fromJson(defaultStyle.style).update();
+
+    // Run layout if necessary
+    cy.layout({ name: 'preset' }).run();
+});
