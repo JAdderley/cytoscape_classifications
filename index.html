@@ -8,6 +8,32 @@
 
         <link rel="stylesheet" href="styles/main.css">
 
+        <!-- Optional: Add some basic styling for the search bar -->
+        <style>
+            #search-container {
+                position: absolute;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(255, 255, 255, 0.8);
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: 0 0 5px rgba(0,0,0,0.3);
+                z-index: 1000;
+            }
+
+            #search-input {
+                padding: 5px;
+                font-size: 14px;
+                width: 200px;
+            }
+
+            #search-button, #clear-button {
+                padding: 5px 10px;
+                font-size: 14px;
+                margin-left: 5px;
+            }
+        </style>
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -17,6 +43,13 @@
                 </a> to improve your experience.
             </p>
         <![endif]-->
+
+        <!-- Search Bar -->
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="Search shared name..." />
+            <button id="search-button">Search</button>
+            <button id="clear-button">Clear</button> <!-- Clear Button -->
+        </div>
 
         <!-- Actual Cytoscape.js Instance -->
         <div id="cy"></div>
@@ -28,5 +61,5 @@
         <script src="scripts/main.js"></script>
         <script src="scripts/custom.js"></script>
         
-</body>
+    </body>
 </html>

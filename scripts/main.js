@@ -1,29 +1,32 @@
-$(function() {
-    "use strict";
+/* styles/main.css */
 
-    function e(e, n) {
-        for (var t = n.length, o = 0; t >= o; o++) {
-            var s = n[o].title;
-            if (s === e) return n[o]
-        }
-        return null
-    }
-    var n = "#cy",
-        network = networks[Object.keys(networks)[0]],
-        style = styles[0];
-    $(n).cytoscape({
-        layout: {
-            name: "preset",
-            padding: 10
-        },
-        boxSelectionEnabled: !0,
-        ready: function() {
-            window.cy = this, 
-                    cy.load(network.elements), console.log(network);
-                    console.log(style);
-                    var o = e("default", style);
-                    null === o && (o = style), cy.style().fromJson(o.style).update()
-                
-        }
-    })
-});
+/* Ensure the HTML and Body take up the full height and width */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #555;
+    font-weight: 100;
+}
+
+/* Style for the browsehappy message */
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* Make the Cytoscape container fill the entire page */
+#cy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #eee;
+    display: block; /* Ensures the div behaves as a block-level element */
+}
